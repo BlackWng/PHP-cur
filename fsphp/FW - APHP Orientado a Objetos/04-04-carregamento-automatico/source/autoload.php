@@ -2,18 +2,17 @@
 
 spl_autoload_register(function ($class){
     $namespace = "Source\\";
-    $basedir = __DIR__."/";
+    $baseDir = __DIR__."/";
     $len = strlen($namespace);
+    //var_dump($class);
 
-    if (strncmp($namespace, $class, $len) !== 0){
+    if(strncmp($namespace, $class, $len) !== 0)
         return ;
-    }
 
     $relativeClass = substr($class, $len);
-    var_dump($relativeClass);
 
-    $file = $basedir.str_replace("\\", "/", $relativeClass).".php";
-    var_dump($file);
+    $file = $baseDir . str_replace("\\", "/", $relativeClass).".php";
 
-    var_dump($class, $namespace, $basedir);
+    if(file_exists($file))
+        require $file;
 });
